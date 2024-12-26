@@ -165,44 +165,34 @@ export default defineComponent({
         this.total = res.data.total
       })
     },
-    save(isbn){
-      //ES6语法
-      //地址,但是？IP与端口？+请求参数
-      // this.form?这是自动保存在form中的，虽然显示时没有使用，但是这个对象中是有它的
-      if(this.form.isbn){
-        request.post("/LendRecord" + isbn, this.form).then(res => {
-          console.log(res)
-          if (res.code == 0) {
-            ElMessage({
-              message: '新增成功',
-              type: 'success',
-            })
+    save(isbn) {
+      if (this.form.isbn) {
+        request.put(`/LendRecord/updateByIsbn/${isbn}`, this.form).then(res => {
+          if (res.code === 0) {
+            ElMessage.success("更新成功");
+
+
           } else {
-            ElMessage.error(res.msg)
+            ElMessage.success(res.msg);
           }
-
-          this.load() //不知道为啥，更新必须要放在这里面
-          this.dialogVisible = false
-        })
-      }
-      else {
-        request.put("/LendRecord/" + isbn, this.form).then(res => {
-          console.log(res)
-          if (res.code == 0) {
-            ElMessage({
-              message: '更新成功',
-              type: 'success',
-            })
+          this.load(); // 重新加载列表数据
+          this.dialogVisible = false; // 关闭弹窗
+        });
+      } else {
+        request.put(`/LendRecord/updateByLendTime/${this.form.lendTime}`, this.form).then(res => {
+          if (res.code === 0) {
+            ElMessage.success("新增成功");
+            this.load(); // 重新加载列表数据
+            this.dialogVisible2 = false; // 关闭弹窗
           } else {
-            ElMessage.error(res.msg)
+            ElMessage.success(res.msg);
           }
-
-          this.load() //不知道为啥，更新必须要放在这里面
-          this.dialogVisible2 = false
-        })
+          this.load(); // 重新加载列表数据
+          this.dialogVisible = false; // 关闭弹窗
+        });
       }
-
     },
+
     clear(){
       this.search1 = ""
       this.search2 = ""

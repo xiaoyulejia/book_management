@@ -11,7 +11,6 @@ import com.example.demo.mapper.LendRecordMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,26 +74,23 @@ public class LendRecordController {
         return Result.success(LendRecordPage);
     }
 
-    @PutMapping("/{isbn}")
-    public  Result<?> update(@PathVariable String isbn,@RequestBody LendRecord lendRecord){
+    @PutMapping("/updateByIsbn/{isbn}")
+    public Result<?> update(@PathVariable String isbn, @RequestBody LendRecord lendRecord) {
         UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("isbn",isbn);
+        updateWrapper.eq("isbn", isbn);
         LendRecord lendrecord = new LendRecord();
         lendrecord.setLendTime(lendRecord.getLendTime());
         lendrecord.setReturnTime(lendRecord.getReturnTime());
         lendrecord.setStatus(lendRecord.getStatus());
-        LendRecordMapper.update(lendrecord, updateWrapper);
+
+        int updatedRows = LendRecordMapper.update(lendrecord, updateWrapper);
+        System.out.println("Updated rows: " + updatedRows);
+        if (updatedRows == 0) {
+            return Result.error("11","有问题");
+        }
         return Result.success();
     }
-    @PutMapping("/{lendTime}")
-    public  Result<?> update2(@PathVariable Date lendTime, @RequestBody LendRecord lendRecord){
-        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("lendTime",lendTime);
-        LendRecord lendrecord = new LendRecord();
-        lendrecord.setReturnTime(lendRecord.getReturnTime());
-        lendrecord.setStatus(lendRecord.getStatus());
-        LendRecordMapper.update(lendrecord, updateWrapper);
-        return Result.success();
-    }
+
+
 
 }

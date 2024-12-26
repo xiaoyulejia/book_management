@@ -28,9 +28,9 @@ export default {
   data() {
     return {
       cards: [
-        { title: '购买记录', data: 100, icon: '#iconlend-record-pro' },
+        { title: '借出记录', data: 100, icon: '#iconlend-record-pro' },
         { title: '总访问', data: 100, icon: '#iconvisit'   },
-        { title: '药品数', data: 100, icon: '#iconbook-pro' },
+        { title: '图书数', data: 100, icon: '#iconbook-pro' },
         { title: '员工数', data: 1000, icon: '#iconpopulation' }
       ],
       data:{}

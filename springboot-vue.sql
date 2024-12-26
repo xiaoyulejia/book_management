@@ -14,10 +14,6 @@
  Date: 26/06/2024 13:32:52
 */
 
-CREATE DATABASE drug CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE drug;
-
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -175,7 +171,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (5, 'admin', '52elaina', 'xiaoyulejia', '18321299982', '男', '尊贵的长理\n', 1);
+INSERT INTO `user` VALUES (5, 'admin', 'admin', 'star', '18321299982', '男', '尊贵的长理\n', 1);
 INSERT INTO `user` VALUES (13, '2656454', '123456', '小娱乐家', '12313282823', '男', '长理', 2);
 INSERT INTO `user` VALUES (15, '542212', '12345', 'wp', '12313282823', '女', '长理', 2);
 INSERT INTO `user` VALUES (16, '12345', '12345', 'test', '13213232989', '男', '长理', 2);
